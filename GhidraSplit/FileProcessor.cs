@@ -4,8 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows.Controls;
-using System.Xml.Linq;
 
 namespace GhidraSplit
 {
@@ -224,11 +222,6 @@ namespace GhidraSplit
                                 realBuffer.Add(lineBuffer[i]);
                             }
 
-                            //string mergedBuffer = String.Join(" ", lineBuffer);
-                            //string[] splits1 = mergedBuffer.Split("(");
-                            //string[] splits2 = splits1[0].Split(" ");
-                            //string name = splits2.Last();
-
                             string funClass = getFunctionClass(name);
                             if (!Functions.ContainsKey(funClass))
                                 Functions.Add(funClass, new List<CodePiece>());
@@ -320,12 +313,6 @@ namespace GhidraSplit
             ERROR
         }
 
-        /*
-         * BOOL Axa::dbgButtonDown(INT userId,ULONG buttons,INT padId)
-
-           {
-           }
-         */
         public static string getFunctionName(string line)
         {
             string[] splits1 = line.Split("(");
@@ -345,22 +332,12 @@ namespace GhidraSplit
             return splits[0];
         }
 
-        // struct VTABLE<gb::PLAYER> { // PlaceHolder Class Structure
-        // };
         public static string getStructName(string line)
         {
             string[] splits = line.Split(" ");
             return splits[1];
         }
 
-        /*
-         * typedef enum THREAD_PRI {
-               PRI_MOVIE=11,
-               PRI_VSYNC=40,
-               PRI_CD_READ_CALLBACK=10,
-               PRI_MAIN=30
-           } THREAD_PRI;
-        */
         public static string getEnumName(string line)
         {
             string[] splits = line.Split(" ");
